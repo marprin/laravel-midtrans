@@ -41,7 +41,7 @@ class Veritrans implements VeritransFactory {
     }
 
     public static function vtweb_charge($body) {
-        $endpoint = self::baseUrl() . '/transactions';
+        $endpoint = self::baseUrl() . '/charge';
         return self::clientRequest($endpoint, 'POST', $body);
     }
 
