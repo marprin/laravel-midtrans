@@ -1,12 +1,16 @@
 <?php
 namespace Marprinhm\Midtrans;
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 use Exception;
+use GuzzleHttp\Client;
 use Marprinhm\Midtrans\Contracts\MidtransFactory;
 
 class Midtrans implements MidtransFactory {
     private static $server_key;
     private static $is_production;
+    private $client;
 
     CONST SNAP_SANDBOX_BASE_URL = 'https://app.sandbox.midtrans.com/snap/v1';
     CONST SNAP_PRODUCTION_BASE_URL = 'https://app.midtrans.com/snap/v1';
@@ -14,6 +18,7 @@ class Midtrans implements MidtransFactory {
     public function __construct($server_key, $is_production) {
         self::$server_key = $server_key;
         self::$is_production = $is_production;
+        $this->client = new Client();
     }
 
     public static function baseUrl() {

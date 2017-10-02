@@ -1,12 +1,16 @@
 <?php
 namespace Marprinhm\Midtrans;
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 use Exception;
+use GuzzleHttp\Client;
 use Marprinhm\Midtrans\Contracts\VeritransFactory;
 
 class Veritrans implements VeritransFactory {
     private static $server_key;
     private static $is_production;
+    private $client;
 
     CONST SANDBOX_BASE_URL = 'https://api.sandbox.veritrans.co.id/v2';
     CONST PRODUCTION_BASE_URL = 'https://api.veritrans.co.id/v2';
@@ -14,6 +18,7 @@ class Veritrans implements VeritransFactory {
     public function __construct($server_key, $is_production) {
         self::$server_key = $server_key;
         self::$is_production = $is_production;
+        $this->client = new Client();
     }
 
     public static function baseUrl() {
