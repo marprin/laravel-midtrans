@@ -2,14 +2,14 @@
 namespace Marprinhm\Midtrans;
 
 use Exception;
-use Marprinhm\Midtrans\Contracts\MidtransFactory;
+use Marprinhm\Midtrans\Contracts\VeritransFactory;
 
-class Midtrans implements MidtransFactory {
+class Veritrans implements VeritransFactory {
     private static $server_key;
     private static $is_production;
 
-    CONST SNAP_SANDBOX_BASE_URL = 'https://app.sandbox.midtrans.com/snap/v1';
-    CONST SNAP_PRODUCTION_BASE_URL = 'https://app.midtrans.com/snap/v1';
+    CONST SANDBOX_BASE_URL = 'https://api.sandbox.veritrans.co.id/v2';
+    CONST PRODUCTION_BASE_URL = 'https://api.veritrans.co.id/v2';
 
     public function __construct($server_key, $is_production) {
         self::$server_key = $server_key;
@@ -17,7 +17,7 @@ class Midtrans implements MidtransFactory {
     }
 
     public static function baseUrl() {
-        return (self::$is_production) ? self::SNAP_PRODUCTION_BASE_URL : self::SNAP_SANDBOX_BASE_URL;
+        return (self::$is_production) ? self::PRODUCTION_BASE_URL : self::SANDBOX_BASE_URL;
     }
 
     private static function header() {
@@ -40,7 +40,7 @@ class Midtrans implements MidtransFactory {
         }
     }
 
-    public static function getSnapToken($body) {
+    public static function vtweb_charge($body) {
         $endpoint = self::baseUrl() . '/transactions';
         return self::clientRequest($endpoint, 'POST', $body);
     }

@@ -3,7 +3,7 @@
     "description": "A Midtrans Payment Wrapper for Laravel",
     "license": "MIT",
     "keywords": [
-        "laravel", "payment", "midtrans"
+        "laravel", "payment", "midtrans", "veritrans"
     ],
     "authors": [
         {
@@ -27,7 +27,8 @@
                 "Marprihm\\Midtrans\\MidtransServiceProvider"
             ],
             "aliases": {
-                "Midtrans": "Marprinhm\\Midtrans\\Facade"
+                "Midtrans": "Marprinhm\\Midtrans\\Facades\\Midtrans",
+                "Veritrans": "Marprinhm\\Midtrans\\Facades\\Veritrans"
             }
         }
     },

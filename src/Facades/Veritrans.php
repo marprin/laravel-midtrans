@@ -1,15 +1,15 @@
 <?php
-namespace Marprinhm\Midtrans;
+namespace Marprinhm\Midtrans\Facades;
 
 use Illuminate\Support\Facades\Facade as IlluminateFacade;
-use Marprinhm\Midtrans\Midtrans;
+use Marprinhm\Midtrans\Veritrans as VeritransClass;
 
-class Facade extends IlluminateFacade {
+class Veritrans extends IlluminateFacade {
     /**
     * Get the registered name of component.
     * @return string
     */
     protected static function getFacadeAccessor() {
-        return Midtrans::class;
+        return VeritransClass::class;
     }
 }

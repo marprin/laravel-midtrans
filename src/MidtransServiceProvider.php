@@ -3,6 +3,8 @@
 namespace Marprinhm\Midtrans;
 
 use Illuminate\Support\ServiceProvider;
+use Marprinhm\Midtrans\Midtrans;
+use Marprinhm\Midtrans\Veritrans;
 
 class MidtransServiceProvider extends ServiceProvider
 {
@@ -36,5 +38,18 @@ class MidtransServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom($this->config_path, 'midtrans');
+
+        $this->app->singleton(Midtrans::class, function ($app) {
+            return new Midtrans($this->app['config']['midtrans.server_key'], $this->app['config']['midtrans.is_production']);
+        });
+
+        $this->app->singleton(Veritrans::class, function ($app) {
+            return new Veritrans($this->app['config']['midtrans.server_key'], $this->app['config']['midtrans.is_production']);
+        });
+    }
+
+    public function provides()
+    {
+        return [Midtrans::class, Veritrans::class];
     }
 }

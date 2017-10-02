@@ -1,15 +1,7 @@
 <?php
 
 return [
-    'is_sandbox_mode' => false,
+    'is_production' => false,
     'client_key' => '',
-    'server_key' => '',
-    'url' => [
-        'snap' => [
-            
-        ],
-        'vt_web' => [
-    
-        ]  
-    ]
+    'server_key' => ''
 ];
