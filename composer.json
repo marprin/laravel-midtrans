@@ -1,0 +1,36 @@
+{
+    "name": "marprinhm/midtrans",
+    "description": "A Midtrans Payment Wrapper for Laravel",
+    "license": "MIT",
+    "keywords": [
+        "laravel", "payment", "midtrans"
+    ],
+    "authors": [
+        {
+            "name": "Marprin Hennes Muchri",
+            "email": "marprin93@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "illuminate/support": "5.1.x|5.2.x|5.3.x|5.4.x|5.5.x",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Marprinhm\\Midtrans\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Marprihm\\Midtrans\\MidtransServiceProvider"
+            ],
+            "aliases": {
+                "Midtrans": "Marprinhm\\Midtrans\\Facade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
