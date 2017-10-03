@@ -28,6 +28,8 @@ class MidtransServiceProvider extends ServiceProvider
         $this->publishes([
             $this->config_path => config_path('midtrans.php')
         ]);
+
+        require __DIR__ . '/../vendor/autoload.php';
     }
 
     /**

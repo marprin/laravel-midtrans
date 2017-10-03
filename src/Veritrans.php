@@ -1,8 +1,6 @@
 <?php
 namespace Marprinhm\Midtrans;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
 use Exception;
 use GuzzleHttp\Client;
 use Marprinhm\Midtrans\Contracts\VeritransFactory;
