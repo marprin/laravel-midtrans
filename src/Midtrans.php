@@ -19,7 +19,7 @@ class Midtrans implements MidtransFactory {
         self::$is_production = $is_production;
     }
 
-    public static function baseUrl() {
+    private static function baseUrl() {
         return (self::$is_production) ? self::SNAP_PRODUCTION_BASE_URL : self::SNAP_SANDBOX_BASE_URL;
     }
 

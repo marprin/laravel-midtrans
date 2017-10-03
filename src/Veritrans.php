@@ -19,7 +19,7 @@ class Veritrans implements VeritransFactory {
         self::$is_production = $is_production;
     }
 
-    public static function baseUrl() {
+    private static function baseUrl() {
         return (self::$is_production) ? self::PRODUCTION_BASE_URL : self::SANDBOX_BASE_URL;
     }
 
