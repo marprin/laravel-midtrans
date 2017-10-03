@@ -22,6 +22,9 @@
         }
     },
     "extra": {
+        "branch-alias": {
+            "dev-master": "0.3-dev"
+        },
         "laravel": {
             "providers": [
                 "Marprinhm\\Midtrans\\MidtransServiceProvider"
@@ -35,7 +38,5 @@
     "config":{
         "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "version": "v0.3.0"
+    "minimum-stability": "dev"
 }
