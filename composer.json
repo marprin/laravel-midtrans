@@ -24,7 +24,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Marprihm\\Midtrans\\MidtransServiceProvider"
+                "Marprinhm\\Midtrans\\MidtransServiceProvider"
             ],
             "aliases": {
                 "Midtrans": "Marprinhm\\Midtrans\\Facades\\Midtrans",
@@ -36,5 +36,6 @@
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "version": "v0.3.0"
 }

@@ -10,7 +10,6 @@ use Marprinhm\Midtrans\Contracts\VeritransFactory;
 class Veritrans implements VeritransFactory {
     private static $server_key;
     private static $is_production;
-    private $client;
 
     CONST SANDBOX_BASE_URL = 'https://api.sandbox.veritrans.co.id/v2';
     CONST PRODUCTION_BASE_URL = 'https://api.veritrans.co.id/v2';
@@ -18,7 +17,6 @@ class Veritrans implements VeritransFactory {
     public function __construct($server_key, $is_production) {
         self::$server_key = $server_key;
         self::$is_production = $is_production;
-        $this->client = new Client();
     }
 
     public static function baseUrl() {
@@ -27,25 +25,33 @@ class Veritrans implements VeritransFactory {
 
     private static function header() {
         return [
-            'Content-Type: application/json',
-            'Accept: application/json',
-            'Authorization: Basic' . base64_encode(self::$server_key . ':')
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Basic ' . base64_encode(self::$server_key. ':')
         ];
     }
 
     private static function clientRequest($url, $type, $data = null) {
         try {
-            return $this->client->request($type, $url, [
+            $client = new Client();
+            $request = $client->request($type, $url, [
                     'headers' => self::header(),
                     'verify' => dirname(__FILE__) . '/cert/cacert.pem',
                     'json' => $data
                 ]);
-        } catch (Exception $e) {
 
+            return json_decode((string) $request->getBody());
+        } catch (Exception $e) {
+            throw new Exception ($e->getMessage() ,$e->getResponse()->getStatusCode());
         }
     }
 
-    public static function vtweb_charge($body) {
+    public static function vtwebCharge($body) {
+        $endpoint = self::baseUrl() . '/charge';
+        return self::clientRequest($endpoint, 'POST', $body)->redirect_url;
+    }
+
+    public static function vtdirectCharge($body) {
         $endpoint = self::baseUrl() . '/charge';
         return self::clientRequest($endpoint, 'POST', $body);
     }
@@ -62,7 +68,7 @@ class Veritrans implements VeritransFactory {
     */
     public static function approve($order_id) {
         $endpoint = self::baseUrl() . '/' . $order_id . '/approve';
-        return self::clientRequest($endpoint, 'POST');
+        return self::clientRequest($endpoint, 'POST')->status_code;
     }
 
     /**
@@ -72,7 +78,7 @@ class Veritrans implements VeritransFactory {
     */
     public static function cancel($order_id) {
         $endpoint = self::baseUrl() . '/' . $order_id . '/cancel';
-        return self::clientRequest($endpoint, 'POST');
+        return self::clientRequest($endpoint, 'POST')->status_code;
     }
 
     /**

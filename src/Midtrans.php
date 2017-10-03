@@ -10,7 +10,6 @@ use Marprinhm\Midtrans\Contracts\MidtransFactory;
 class Midtrans implements MidtransFactory {
     private static $server_key;
     private static $is_production;
-    private $client;
 
     CONST SNAP_SANDBOX_BASE_URL = 'https://app.sandbox.midtrans.com/snap/v1';
     CONST SNAP_PRODUCTION_BASE_URL = 'https://app.midtrans.com/snap/v1';
@@ -18,7 +17,6 @@ class Midtrans implements MidtransFactory {
     public function __construct($server_key, $is_production) {
         self::$server_key = $server_key;
         self::$is_production = $is_production;
-        $this->client = new Client();
     }
 
     public static function baseUrl() {
@@ -27,27 +25,30 @@ class Midtrans implements MidtransFactory {
 
     private static function header() {
         return [
-            'Content-Type: application/json',
-            'Accept: application/json',
-            'Authorization: Basic' . base64_encode(self::$server_key . ':')
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => 'Basic ' . base64_encode(self::$server_key. ':')
         ];
     }
 
     private static function clientRequest($url, $type, $data = null) {
         try {
-            return $this->client->request($type, $url, [
+            $client = new Client();
+            $request = $client->request($type, $url, [
                     'headers' => self::header(),
                     'verify' => dirname(__FILE__) . '/cert/cacert.pem',
                     'json' => $data
                 ]);
-        } catch (Exception $e) {
 
+            return json_decode((string) $request->getBody());
+        } catch (Exception $e) {
+            throw new Exception ($e->getMessage() ,$e->getResponse()->getStatusCode());
         }
     }
 
     public static function getSnapToken($body) {
         $endpoint = self::baseUrl() . '/transactions';
-        return self::clientRequest($endpoint, 'POST', $body);
+        return self::clientRequest($endpoint, 'POST', $body)->token;
     }
 
     public static function status($order_id) {
@@ -62,7 +63,7 @@ class Midtrans implements MidtransFactory {
     */
     public static function approve($order_id) {
         $endpoint = self::baseUrl() . '/' . $order_id . '/approve';
-        return self::clientRequest($endpoint, 'POST');
+        return self::clientRequest($endpoint, 'POST')->status_code;
     }
 
     /**
@@ -72,7 +73,7 @@ class Midtrans implements MidtransFactory {
     */
     public static function cancel($order_id) {
         $endpoint = self::baseUrl() . '/' . $order_id . '/cancel';
-        return self::clientRequest($endpoint, 'POST');
+        return self::clientRequest($endpoint, 'POST')->status_code;
     }
 
     /**
