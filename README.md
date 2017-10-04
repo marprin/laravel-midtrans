@@ -1,6 +1,6 @@
 # Laravel Midtrans/Veritrans Library
 
-## Instalation
+## Installation
 
 First, require the package in composer.json by
 
