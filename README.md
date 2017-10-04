@@ -4,7 +4,7 @@
 
 First, require the package in composer.json by
 
-    composer require marprinhm/midtrans dev-master
+    composer require marprinhm/midtrans
 
 After require the package, open `config/app.php` to add the ServiceProvider and Facade by following below:
 
