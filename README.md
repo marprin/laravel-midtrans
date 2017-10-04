@@ -47,7 +47,7 @@ If you want to use the easiest way by using the facade but make sure to use the 
 
     use Midtrans;
 
-    class Payment {
+    class Payment extends Controller {
         public function purchase() {
             $transaction_details = [
                 'order_id' => time(),
@@ -92,7 +92,7 @@ If you want to use the easiest way by using the facade but make sure to use the 
 
     use Veritrans;
 
-    class Payment {
+    class Payment extends Controller {
         public function purchase() {
             $transaction_details = [
                 'order_id' => time(),
