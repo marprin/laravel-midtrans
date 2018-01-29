@@ -73,7 +73,7 @@ If you want to use the easiest way by using the facade but make sure to use the 
                 'price' => 10000
             ];
 
-            // Send this options if you want credit card request processed with 3DS
+            // Send this options if you use 3Ds in credit card request
             $credit_card_option = [
                 'secure' => true, 
                 'channel' => 'migs'
