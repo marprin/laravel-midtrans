@@ -15,9 +15,21 @@ class Midtrans implements MidtransFactory {
     CONST SANDBOX_API_BASE_URL = 'https://api.sandbox.midtrans.com/v2/';
     CONST PRODUCTION_API_BASE_URL = 'https://api.midtrans.com/v2/';
 
-    public function __construct($server_key, $is_production) {
+    public function __construct($server_key = null, $is_production = null) {
         self::$server_key = $server_key;
         self::$is_production = $is_production;
+    }
+
+    public function setServerKey($key) {
+        self::$server_key = $key;
+
+        return $this;
+    }
+
+    public function setProduction($env) {
+        self::$is_production = $env;
+
+        return $this;
     }
 
     private static function snapChargeUrl() {
