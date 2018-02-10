@@ -53,19 +53,19 @@ If you want to use the easiest way by using the facade but make sure to use the 
                 'order_id' => time(),
                 'gross_amount' => 10000
             ];
-            
+
             $customer_details = [
                 'first_name' => 'User',
                 'email' => 'user@gmail.com',
                 'phone' => '08238493894'
             ];
-            
+
             $custom_expiry = [
                 'start_time' => date("Y-m-d H:i:s O", time()),
                 'unit' => 'day',
                 'duration' => 2
             ];
-            
+
             $item_details = [
                 'id' => 'PROD-1',
                 'quantity' => 1,
@@ -98,19 +98,19 @@ If you want to use the easiest way by using the facade but make sure to use the 
                 'order_id' => time(),
                 'gross_amount' => 10000
             ];
-            
+
             $customer_details = [
                 'first_name' => 'User',
                 'email' => 'user@gmail.com',
                 'phone' => '08238493894'
             ];
-            
+
             $custom_expiry = [
                 'start_time' => date("Y-m-d H:i:s O", time()),
                 'unit' => 'day',
                 'duration' => 2
             ];
-            
+
             $item_details = [
                 'id' => 'PROD-1',
                 'quantity' => 1,
@@ -158,7 +158,7 @@ If you want to use the easiest way by using the facade but make sure to use the 
 
     Veritrans::vtdirectCharge($data);
 
-    
+
     Veritrans::status($order_id);
 `status` function will take `order_id` in any type of data (preferable `string` or `integer`) type for requesting the status of payment.
 
@@ -170,3 +170,59 @@ If you want to use the easiest way by using the facade but make sure to use the 
 
     Veritrans::expire($order_id);
 `expire` function will take `order_id` in any type of data (preferable `string` or `integer`).
+
+### Dynamic Server Key
+
+Sometime you need to set the server key from database, now we support it!, write this bloody code below!
+
+```
+<?php
+
+namespace Is\Up\To\You;
+
+class Acme {
+
+  public function pay(Payer $user, Orders $orders) {
+      $midtrans = app('midtrans')
+                    ->setServerKey('yourserverkey')
+                    ->setProduction(Bool: true);
+                    $transaction_details = [
+                        'order_id' => time(),
+                        'gross_amount' => 10000
+                    ];
+
+      $customer_details = [
+          'first_name' => 'User',
+          'email' => 'user@gmail.com',
+          'phone' => '08238493894'
+      ];
+
+      $custom_expiry = [
+          'start_time' => date("Y-m-d H:i:s O", time()),
+          'unit' => 'day',
+          'duration' => 2
+      ];
+
+      $item_details = [
+          'id' => 'PROD-1',
+          'quantity' => 1,
+          'name' => 'Product-1',
+          'price' => 10000
+      ];
+
+      $transaction_data = [
+          'payment_type' => 'vtweb',
+          'vtweb' => [
+              'credit_card_3d_secure' => true
+          ],
+          'transaction_details' => $transaction_details,
+          'item_details' => $item_details,
+          'customer_details' => $customer_details
+      ];
+
+      $redirect_url = $midtrans->vtwebCharge($transaction_data);
+      return $redirect_url;
+  }
+
+}
+```

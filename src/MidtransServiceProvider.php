@@ -48,6 +48,9 @@ class MidtransServiceProvider extends ServiceProvider
         $this->app->singleton(Veritrans::class, function ($app) {
             return new Veritrans($this->app['config']['midtrans.server_key'], $this->app['config']['midtrans.is_production']);
         });
+
+        $this->app->bind('midtrans', Midtrans::class);
+        $this->app->bind('veritrans', Veritrans::class);
     }
 
     public function provides()
