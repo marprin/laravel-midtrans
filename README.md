@@ -24,7 +24,11 @@ Before using the package, it's better to publish the config file first to make y
 
     php artisan vendor:publish --provider="Marprinhm\Midtrans\MidtransServiceProvider"
 
-Running command above will copy a config file to your project directory `config/midtrans.php` and you can set the variable.
+Running command above will copy a config file to your project directory `config/midtrans.php` and you can set the variable. To set the variables, it's better to put in the .env file rather than change it directly on the config file, so in your .env file put
+
+    `MIDTRANS_IS_PRODUCTION`, `MIDTRANS_CLIENT_KEY` and `MIDTRANS_SERVER_KEY`
+
+based on your key that's on your midtrans dashboard.
 
 ## Using
 
