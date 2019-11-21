@@ -1,5 +1,10 @@
 # Laravel Midtrans/Veritrans Library
 
+## Important Note
+For older version of laravel, please use v0.3.4 as the upper version of the lib won't be supported anymore.
+
+    composer require marprinhm/midtrans:v0.3.4
+
 ## Installation
 
 First, require the package in composer.json by

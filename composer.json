@@ -3,7 +3,10 @@
     "description": "A Midtrans Payment Wrapper for Laravel",
     "license": "MIT",
     "keywords": [
-        "laravel", "payment", "midtrans", "veritrans"
+        "laravel",
+        "payment",
+        "midtrans",
+        "veritrans"
     ],
     "authors": [
         {
@@ -12,14 +15,14 @@
         }
     ],
     "require": {
-        "php": ">=5.6.4",
-        "illuminate/support": "5.1.x|5.2.x|5.3.x|5.4.x|5.5.x|5.6.x|5.7.x|5.8.x",
-        "guzzlehttp/guzzle": "^6.3"
+        "php": ">=7.2.0",
+        "illuminate/support": "6.x",
+        "guzzlehttp/guzzle": "^6.4"
     },
     "require-dev": {
-        "mockery/mockery": "~0.9",
-        "phpunit/phpunit": "~4.0|~5.0",
-        "vlucas/phpdotenv": "^2.4"
+        "mockery/mockery": "~1.0",
+        "phpunit/phpunit": "~8.0",
+        "vlucas/phpdotenv": "^3.6"
     },
     "autoload": {
         "psr-4": {
@@ -33,7 +36,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.3.4-dev"
+            "dev-master": "1.0.0-dev"
         },
         "laravel": {
             "providers": [
@@ -45,7 +48,7 @@
             }
         }
     },
-    "config":{
+    "config": {
         "sort-packages": true
     },
     "minimum-stability": "dev",
