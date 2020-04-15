@@ -1,7 +1,8 @@
 # Laravel Midtrans/Veritrans Library
 
 ## Important Note
-For older version of laravel, please use v0.3.4 as the upper version of the lib won't be supported anymore.
+
+For older version of laravel, please use v0.3.4 as the upper version of the lib won't support it anymore.
 
     composer require marprinhm/midtrans:v0.3.4
 
@@ -62,19 +63,19 @@ If you want to use the easiest way by using the facade but make sure to use the 
                 'order_id' => time(),
                 'gross_amount' => 10000
             ];
-            
+
             $customer_details = [
                 'first_name' => 'User',
                 'email' => 'user@gmail.com',
                 'phone' => '08238493894'
             ];
-            
+
             $custom_expiry = [
                 'start_time' => date("Y-m-d H:i:s O", time()),
                 'unit' => 'day',
                 'duration' => 2
             ];
-            
+
             $item_details = [
                 'id' => 'PROD-1',
                 'quantity' => 1,
@@ -84,7 +85,7 @@ If you want to use the easiest way by using the facade but make sure to use the 
 
             // Send this options if you use 3Ds in credit card request
             $credit_card_option = [
-                'secure' => true, 
+                'secure' => true,
                 'channel' => 'migs'
             ];
 
@@ -114,19 +115,19 @@ If you want to use the easiest way by using the facade but make sure to use the 
                 'order_id' => time(),
                 'gross_amount' => 10000
             ];
-            
+
             $customer_details = [
                 'first_name' => 'User',
                 'email' => 'user@gmail.com',
                 'phone' => '08238493894'
             ];
-            
+
             $custom_expiry = [
                 'start_time' => date("Y-m-d H:i:s O", time()),
                 'unit' => 'day',
                 'duration' => 2
             ];
-            
+
             $item_details = [
                 'id' => 'PROD-1',
                 'quantity' => 1,
@@ -150,39 +151,50 @@ If you want to use the easiest way by using the facade but make sure to use the 
     }
 
 ## Available Function
+
 ### Midtrans
 
     Midtrans::getSnapToken($data);
+
 `getSnapToken` will take `array` data as parameter that passed to the function and will return `string` of token.
 
     Midtrans::status($order_id);
+
 `status` function will take `order_id` in any type of data (preferable `string` or `integer`) type for requesting the status of payment.
 
     Midtrans::approve($order_id);
+
 `approve` function will take `order_id` in any type of data (preferable `string` or `integer`) and will return `status_code`.
 
     Midtrans::cancel($order_id);
+
 `cancel` function will take `order_id` in any type of data (preferable `string` or `integer`) and will return `status_code`.
 
     Midtrans::expire($order_id);
+
 `expire` function will take `order_id` in any type of data (preferable `string` or `integer`).
 
 ### Veritrans
 
     Veritrans::vtwebCharge($data);
+
 `vtwebCharge` function take `array` data as parameter and will return `string` endpoint for merchant redirect user to.
 
     Veritrans::vtdirectCharge($data);
 
-    
+
     Veritrans::status($order_id);
+
 `status` function will take `order_id` in any type of data (preferable `string` or `integer`) type for requesting the status of payment.
 
     Veritrans::approve($order_id);
+
 `approve` function will take `order_id` in any type of data (preferable `string` or `integer`) and will return `status_code`.
 
     Veritrans::cancel($order_id);
+
 `cancel` function will take `order_id` in any type of data (preferable `string` or `integer`) and will return `status_code`.
 
     Veritrans::expire($order_id);
+
 `expire` function will take `order_id` in any type of data (preferable `string` or `integer`).
